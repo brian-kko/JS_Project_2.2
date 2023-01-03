@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @media screen and (min-width:600px){
+            .container{
+                color: white;
+                margin: 0;
+                width: 100%;
+            }
+            div{
+                padding: 10px;
+            }
+            body{
+                margin:0;
+                flex-direction: row;
+                display: flex;
+                background-color: darkcyan;
+                font-size: 200%;
+            }
+            img{
+                max-height: 200px;
+            }
+            .content   
+            {
+                display: flex;
+                flex-direction: row;
+            }
+        }
+    </style>
+    <script>
+        function initialize()
+        {
+            powerNumOutput = document.getElementById("powerNum");
+            speedOutput = document.getElementById("speed");
+            integrityOutput = document.getElementById("integrity");
+            scannerOutput = document.getElementById("scanner");
+            defenseOutput = document.getElementById("defense");
+            powerTypeOutput = document.getElementById("powerType");
+
+            powerNum=0;
+            speed=0;
+            integrity=0;
+            scanner=false;
+            defense=false;
+            powerType=0;
+
+            display();
+        }
+
+        function increaseOne(element)
+        {
+            if(powerType!=0)
+            {
+                document.getElementById("powerType").style.backgroundColor="darkcyan";
+                if(element == 1) powerNum++;
+                if(element == 2) speed++;
+                if(element == 3) integrity++;
+            }
+            else document.getElementById("powerType").style.backgroundColor="red";
+            display();
+        }
+
+        function decreaseOne(element)
+        {
+            if(powerType!=0)
+            {
+                document.getElementById("powerType").style.backgroundColor="darkcyan";
+                if(element == 1) powerNum--;
+                if(element == 2) speed--;
+                if(element == 3) integrity--;
+            }
+            else document.getElementById("powerType").style.backgroundColor="darkred";
+            display();
+        }
+
+        function toggle(element)
+        {
+            if(powerType!=0)
+            {
+                document.getElementById("powerType").style.backgroundColor="darkcyan";
+                if(element==1)
+                {
+                    if(scanner==false) scanner=true;
+                    else scanner=false;
+                }
+                if(element==2)
+                {
+                    if(defense==false) defense=true;
+                    else defense=false;
+                }
+            }
+            else document.getElementById("powerType").style.backgroundColor=rgba(255, 0, 0, 0.6);
+            display();
+        }
+
+        function changePowerType(type)
+        {
+            powerType=type;
+            document.getElementById("powerType").style.backgroundColor="darkcyan";
+            display();
+        }
+
+        function display()
+        {
+            powerNumOutput.innerHTML=powerNum;
+            speedOutput.innerHTML=speed;
+            integrityOutput.innerHTML=integrity;
+            if(scanner) 
+            {
+                scannerOutput.innerHTML="Active";
+                document.getElementById("button1").innerHTML = "Turn Off";
+            }
+            else 
+            {
+                scannerOutput.innerHTML="Inactive";
+                document.getElementById("button1").innerHTML = "Turn On";
+            }
+            if(defense) 
+            {
+                defenseOutput.innerHTML="Active";
+                document.getElementById("button2").innerHTML = "Turn Off";
+            }
+            else 
+            {
+                defenseOutput.innerHTML="Inactive";
+                document.getElementById("button2").innerHTML = "Turn On";
+            }
+            if(powerType==1) powerTypeOutput.innerHTML="Hydro";
+            if(powerType==2) powerTypeOutput.innerHTML="Nuclear";
+            if(powerType==3) powerTypeOutput.innerHTML="Solar";
+
+            
+        }
+
+    </script>
+</head>
+<body onload="initialize();">
+    <div class="container">
+        <div>
+            <h1>Build-A-Robot</h1>
+        </div>
+
+        <div class="content">
+            <div class="buttons">
+                <div>
+                    <button onclick="increaseOne(1);">+</button> 
+                    <button onclick="decreaseOne(1);">-</button>
+                    Power Level: <span id="powerNum"></span> 
+                </div>
+                <div>
+                    <button onclick="increaseOne(2);">+</button>
+                    <button onclick="decreaseOne(2);">-</button>
+                    Top Speed: <span id="speed"></span>
+                </div>
+                <div>
+                    <button onclick="increaseOne(3);">+</button>
+                    <button onclick="decreaseOne(3);">-</button>
+                    Structural Integrity: <span id="integrity"></span>
+                </div>
+                <div>
+                    <button id="button1" onclick="toggle(1);">Turn On</button>
+                    Scanners: <span id="scanner"></span>
+                </div>
+                <div>
+                    <button id="button2" onclick="toggle(2);">Turn On</button>
+                    Defensive Systems: <span id="defense"></span>
+                </div>
+                <div>
+                    <button onclick="changePowerType(1);">Hydro</button>
+                    <button onclick="changePowerType(2);">Nuclear</button>
+                    <button onclick="changePowerType(3);">Solar</button>
+                    Power Type: <span id="powerType">No Power Type Selected</span>
+                </div>
+            </div>
+            <div class="images"><img src="robot.PNG" alt="Image of Robot"></div>
+
+        </div>
+        
+    </div>
+</body>
+</html>

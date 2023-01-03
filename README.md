@@ -1,1 +1,1 @@
-# JS_Project_2.2
+# JS_Project_2
